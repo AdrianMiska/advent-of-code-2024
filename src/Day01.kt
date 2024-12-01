@@ -1,18 +1,35 @@
+import kotlin.math.abs
+
 fun main() {
+
+    /**
+     * Splits the text into two lists of integers.
+     */
+    fun List<String>.splitToInt(): Pair<List<Int>, List<Int>> =
+        map { it.substringBefore(" ").toInt() }.sorted() to
+                map { it.substringAfterLast(" ").toInt() }.sorted()
+
+
     fun part1(input: List<String>): Int {
-        return input.size
+        val (list1, list2) = input.splitToInt()
+        val distances = list1.zip(list2).map { abs(it.first - it.second) }
+
+        return distances.sum()
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val (list1, list2) = input.splitToInt()
+
+        val counts = list1.map { candidate -> list2.count { it == candidate } }
+        val similarities = list1.zip(counts).map { it.first * it.second }
+
+        return similarities.sum()
     }
 
-    // Test if implementation meets criteria from the description, like:
-    check(part1(listOf("test_input")) == 1)
 
-    // Or read a large test input from the `src/Day01_test.txt` file:
     val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    check(part1(testInput) == 11)
+    check(part2(testInput) == 31)
 
     // Read the input from the `src/Day01.txt` file.
     val input = readInput("Day01")
