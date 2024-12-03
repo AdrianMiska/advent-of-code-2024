@@ -19,3 +19,16 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+
+fun Iterable<Int>.allIncreasing(): Boolean {
+    return zipWithNext { a, b -> a < b }.all { it }
+}
+
+fun Iterable<Int>.allDecreasing(): Boolean {
+    return zipWithNext { a, b -> a > b }.all { it }
+}
+
+fun <T> List<T>.dropIndex(index: Int): List<T> {
+    return this.filterIndexed { candidateIndex, _ -> index != candidateIndex }
+}
