@@ -32,3 +32,11 @@ fun Iterable<Int>.allDecreasing(): Boolean {
 fun <T> List<T>.dropIndex(index: Int): List<T> {
     return this.filterIndexed { candidateIndex, _ -> index != candidateIndex }
 }
+
+fun <T> List<List<T>>.get(coordinates: Pair<Int, Int>): T {
+    return this[coordinates.first][coordinates.second]
+}
+
+fun <T> List<MutableList<T>>.set(coordinates: Pair<Int, Int>, value: T) {
+    this[coordinates.first][coordinates.second] = value
+}
