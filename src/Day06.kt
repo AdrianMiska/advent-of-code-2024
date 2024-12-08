@@ -79,10 +79,6 @@ class World(initialState: List<String>) {
         }
     }
 
-    private fun Pair<Int, Int>.isInBounds(maxX: Int, maxY: Int): Boolean {
-        return first in 0..maxX && second in 0..maxY
-    }
-
     fun simulate(): Int {
         val visited = mutableSetOf(guard.position)
         val visitedDirectional = mutableSetOf(Pair(guard.position, guard.direction))

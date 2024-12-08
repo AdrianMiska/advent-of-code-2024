@@ -40,3 +40,19 @@ fun <T> List<List<T>>.get(coordinates: Pair<Int, Int>): T {
 fun <T> List<MutableList<T>>.set(coordinates: Pair<Int, Int>, value: T) {
     this[coordinates.first][coordinates.second] = value
 }
+
+fun Pair<Int, Int>.isInBounds(maxX: Int, maxY: Int): Boolean {
+    return first in 0..maxX && second in 0..maxY
+}
+
+operator fun Pair<Int, Int>.minus(other: Pair<Int, Int>): Pair<Int, Int> {
+    return Pair(this.first - other.first, this.second - other.second)
+}
+
+operator fun Pair<Int, Int>.plus(other: Pair<Int, Int>): Pair<Int, Int> {
+    return Pair(this.first + other.first, this.second + other.second)
+}
+
+fun <T> List<T>.pairwise(): List<Pair<T, T>> {
+    return this.flatMap { first -> this.mapNotNull { second -> if (first != second) first to second else null } }
+}
